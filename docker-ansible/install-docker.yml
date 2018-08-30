@@ -1,0 +1,5 @@
+---
+- hosts: rancher-master
+  become: yes
+  roles:
+    - docker-install

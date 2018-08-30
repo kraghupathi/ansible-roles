@@ -1,0 +1,25 @@
+---
+- name: Install docker on ubuntu
+  apt:
+    update_cache: yes
+    name: "{{ item }}"
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add Docker's official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: add repo
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu "{{ ubuntu_release }}" stable
+    state: present
+
+- name: update cache
+  apt:
+    update_cache: yes
+    name: "docker-ce={{ version }}"
