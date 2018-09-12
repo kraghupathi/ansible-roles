@@ -7,7 +7,11 @@
 #+OPTIONS: ^:nil
 
 
-* Vars
+* vars
+  This is where we write all the variables. Currently we are using the
+  docker version in this variables file. This is environment specific
+  and has got lesser precedence when compared to defaults.
+
 #+NAME: vars-main
 #+BEGIN_SRC yaml
 ---
@@ -17,20 +21,68 @@ version: 17.06.2~ce-0~ubuntu
 
 #+END_SRC
 
-* Some task 1 
+* defaults
+  This is where we store default variables. This has got higher
+  precedence when compared to vars.
 #+NAME: ds-defaults-main-2
 #+BEGIN_SRC yaml
 ---
 # defaults file for docker-install
 #+END_SRC
 
-* Some Task 2
-#+NAME: ds-defaults-main-2
+* handlers
+  Handlers are like events which need to be triggered on some
+  particular play in ansible. These can be within are outside a
+  role. We dont have any handlers in our case.
+
+#+NAME: handlers-main
 #+BEGIN_SRC yaml
-become_method: yes
+---
+# handlers for docker-install
+#+END_SRC
+
+* meta
+  This is all the role related data.
+
+#+BEGIN_SRC yaml 
+
 
 #+END_SRC
 
+* tasks
+  These are the main list of tasks to be executed in every host we are
+  running the ansible playbook.
+#+NAME: tasks-main
+#+BEGIN_SRC yaml
+
+---
+- name: Install docker on ubuntu
+  apt:
+    update_cache: yes
+    name: "{{ item }}"
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add Docker's official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: add repo
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu "{{ ubuntu_release }}" stable
+    state: present
+
+- name: update cache
+  apt:
+    update_cache: yes
+    name: "docker-ce={{ version }}"
+
+
+#+END_SRC
 
 
 * Tangle
@@ -75,13 +127,19 @@ roles
    The file generated is
    =docker-install/defaults/main.yaml=.
 
-#+BEGIN_SRC yaml :tangle docker-install/defaults/main.yaml :eval no :noweb yes
+#+BEGIN_SRC yaml :tangle docker-install/defaults/main.yml :eval no :noweb yes
 <<ds-defaults-main-1>>
 <<ds-defaults-main-2>>
 #+END_SRC
 ** Vars Main
 
-#+BEGIN_SRC yaml :tangle docker-install/vars/main.yaml :eval no :noweb yes
+#+BEGIN_SRC yaml :tangle docker-install/vars/main.yml :eval no :noweb yes
 <<vars-main>>
 #+END_SRC
+** Tasks Main
+   The file generated is 
+   =docker-install/tasks/main.yml=.
+#+BEGIN_SRC :tangle docker-install/tasks/main.yml :eval no :noweb yes
+<<tasks-main>>
 
+#+END_SRC
