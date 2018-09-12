@@ -128,7 +128,6 @@ roles
 ** Tasks Main
    The file generated is 
    =docker-install/tasks/main.yml=.
-#+BEGIN_SRC :tangle docker-install/tasks/main.yml :eval no :noweb yes
+#+BEGIN_SRC yaml :tangle docker-install/tasks/main.yml :eval no :noweb yes
 <<tasks-main>>
-
 #+END_SRC
