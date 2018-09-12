@@ -1,0 +1,45 @@
+#+TITLE: Deploy Docker Playbooks 
+#+AUTHOR: VLEAD
+#+DATE: [2018-09-12 Wed]
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Install Docker
+  This installation is on an ubuntu 16.04 base
+  machine. Install Community edition of Docker.  [[https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository][Reference]]
+
+* Make this repository
+  #+BEGIN_EXAMPLE
+  make -k all
+  #+END_EXAMPLE
+
+  This will create =build/code/runtime=.  All the playbooks
+  are here. 
+* Install Docker Playbook
+
+  To install docker we need a playbook which uses the role
+  called 'docker-install' already present in the roles
+  directory of this repository. To install docker in the
+  target host please follow these steps.
+
+
+** Pull docker image
+   This image is built by using the file
+   =runtime/docker-ansible/Dockerfile=.  This images resides
+   on public [[https://hub.docker.com/][dockerhub]].
+
+   #+BEGIN_EXAMPLE
+   docker pull akashkaveti/docker-ansible
+   #+END_EXAMPLE
+
+** Start the container by volume mounting the code of this repository
+#+BEGIN_EXAMPLE
+docker run -v /path/to/this/repo:/data -it akashkaveti/docker-ansible 
+#+END_EXAMPLE
+** Execute the playbook
+#+BEGIN_EXAMPLE
+cd /data ; ansible-playbook -i host-ip --user=username -k -K install-docker.yml
+#+END_EXAMPLE
