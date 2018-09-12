@@ -24,7 +24,7 @@ version: 17.06.2~ce-0~ubuntu
 * defaults
   This is where we store default variables. This has got higher
   precedence when compared to vars.
-#+NAME: ds-defaults-main-2
+#+NAME: ds-defaults-main
 #+BEGIN_SRC yaml
 ---
 # defaults file for docker-install
@@ -96,7 +96,6 @@ roles
     │   │   └── main.yml
     │   ├── meta
     │   │   └── main.yml
-    │   ├── README.md
     │   ├── tasks
     │   │   └── main.yml
     │   ├── tests
@@ -104,7 +103,6 @@ roles
     │   │   └── test.yml
     │   └── vars
     │       └── main.yml
-    ├── docker-install.org
     └── rancher
         ├── defaults
         │   └── main.yml
@@ -112,7 +110,6 @@ roles
         │   └── main.yml
         ├── meta
         │   └── main.yml
-        ├── README.md
         ├── tasks
         │   └── main.yml
         ├── templates
@@ -123,14 +120,6 @@ roles
         └── vars
             └── main.yml
 #+END_EXAMPLE
-** Docker install defaults main.yaml
-   The file generated is
-   =docker-install/defaults/main.yaml=.
-
-#+BEGIN_SRC yaml :tangle docker-install/defaults/main.yml :eval no :noweb yes
-<<ds-defaults-main-1>>
-<<ds-defaults-main-2>>
-#+END_SRC
 ** Vars Main
 
 #+BEGIN_SRC yaml :tangle docker-install/vars/main.yml :eval no :noweb yes
