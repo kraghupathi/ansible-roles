@@ -1,0 +1,27 @@
+#+TITLE: Hosts
+#+AUTHOR: VLEAD
+#+DATE: [2018-09-12 Wed]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+
+
+* Hosts
+#+NAME: hosts
+#+BEGIN_SRC yaml
+[rancher-master]
+10.91.1.150 ansible_user=test
+#+END_SRC
+
+* Tangle
+#+BEGIN_SRC yaml :tangle hosts :eval no :noweb yes
+<<hosts>>
+#+END_SRC
+
+
+
+
+

@@ -1,0 +1,13 @@
+#+TITLE: Index to Configuration of Rancher and Docker
+#+AUTHOR: VLEAD
+#+DATE: [2018-09-12 Wed]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document is an index to the installation and
+  configuration of rancher and docker.
+
+* [[./runtime/index.org][Runtime]]

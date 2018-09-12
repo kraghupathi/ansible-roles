@@ -1,0 +1,13 @@
+#+TITLE: Index to Runtime
+#+AUTHOR: VLEAD
+#+DATE: [2018-09-12 Wed]
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document is an index to the runtime of installation
+  and configuration of rancher and docker.
+
+* [[./docker-ansible/index.org][Docker and Rancher Playbooks]]

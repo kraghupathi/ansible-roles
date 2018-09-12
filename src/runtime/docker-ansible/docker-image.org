@@ -1,0 +1,28 @@
+#+TITLE: Creation of Ansible Docker Image
+#+AUTHOR: VLEAD
+#+DATE: [2018-09-12 Wed]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+
+* Docker Image
+#+NAME: docker-image
+#+BEGIN_SRC 
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install software-properties-common -y
+RUN apt-add-repository ppa:ansible/ansible -y
+RUN apt-get update
+RUN apt-get install ansible -y
+
+CMD /bin/bash
+
+#+END_SRC
+* Tangle
+#+BEGIN_SRC yaml :tangle Dockerfile :eval no :noweb yes
+<<docker-image>>
+#+END_SRC
+

@@ -1,0 +1,26 @@
+#+TITLE: Install Docker
+#+AUTHOR: VLEAD
+#+DATE: [2018-09-12 Wed]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Intorduction
+
+* Install Docker
+
+#+NAME: docker-install
+#+BEGIN_SRC yaml
+---
+- hosts: rancher-master
+  become: yes
+  roles:
+    - docker-install
+#+END_SRC
+
+* Tangle
+#+BEGIN_SRC yaml :tangle install-docker.yml :eval no :noweb yes
+<<docker-install>>
+#+END_SRC
+

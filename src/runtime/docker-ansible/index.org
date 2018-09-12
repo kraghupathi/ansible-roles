@@ -1,0 +1,21 @@
+#+TITLE: Index to Playbooks for Docker and Rancher
+#+AUTHOR: VLEAD
+#+DATE: [2018-09-12 Wed]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  This document is an index to the runtime of installation
+  and configuration of rancher and docker.
+
+* Installation of Docker
+  [[./install-docker.org][install docker]]
+* Hosts
+  [[./hosts.org][hosts]]
+* Docker Image
+  [[./docker-image.org][docker-image]]
+* Roles
+  1. [[./roles/docker-install.org][Configure Docker]]
+  2. [[./roles/rancher-install.org][Configure Rancher]]
