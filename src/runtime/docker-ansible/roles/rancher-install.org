@@ -5,3 +5,121 @@
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
+
+* vars
+  This is where we write all the variables. Currently we are using the
+  docker version in this variables file. This is environment specific
+  and has got lesser precedence when compared to defaults.
+
+#+NAME: vars-main
+#+BEGIN_SRC yaml
+---
+rancher_name: rancher
+rancher_port: 8080
+rancher_server_version: v1.6.21
+
+
+
+#+END_SRC
+
+* defaults
+  This is where we store default variables. This has got higher
+  precedence when compared to vars.
+#+NAME: defaults-main
+#+BEGIN_SRC yaml
+---
+# defaults file for docker-install
+#+END_SRC
+
+* handlers
+  Handlers are like events which need to be triggered on some
+  particular play in ansible. These can be within are outside a
+  role. We dont have any handlers in our case.
+
+#+NAME: handlers-main
+#+BEGIN_SRC yaml
+---
+# handlers for docker-install
+#+END_SRC
+
+* meta
+  This is all the role related data.
+
+#+BEGIN_SRC yaml
+
+
+#+END_SRC
+
+* tasks
+  These are the main list of tasks to be executed in every host we are
+  running the ansible playbook.
+#+NAME: tasks-main
+#+BEGIN_SRC yaml
+---
+- name: Pull and run the Rancher/server container
+  shell: "docker run -d --restart=unless-stopped --name=rancher -p 8080:8080 rancher/server:{{ rancher_server_version }}"
+
+- name: Wait for the Rancher server to start
+  action: command docker logs {{ rancher_name }}
+  register: rancher_logs
+  until: rancher_logs.stdout.find("Listening on") != -1
+  retries: 40
+  delay: 10
+- name: Print Rancher's URL
+  debug:
+    msg: "You can connect to rancher server http://{{ ansible_default_ipv4.address }}:{{ rancher_port }}"
+
+#+END_SRC
+
+
+* Tangle
+This is the structure of the tangled code
+#+BEGIN_EXAMPLE
+roles
+    ├── docker-install
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── README.md
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    ├── docker-install.org
+    └── rancher
+        ├── defaults
+        │   └── main.yml
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── README.md
+        ├── tasks
+        │   └── main.yml
+        ├── templates
+        │   └── rancher.j2
+        ├── tests
+        │   ├── inventory
+        │   └── test.yml
+        └── vars
+            └── main.yml
+#+END_EXAMPLE
+
+** Vars Main
+
+#+BEGIN_SRC yaml :tangle rancher-install/vars/main.yml :eval no :noweb yes
+<<vars-main>>
+#+END_SRC
+** Tasks Main
+   The file generated is
+   =rancher-install/tasks/main.yml=.
+#+BEGIN_SRC :tangle rancher-install/tasks/main.yml :eval no :noweb yes
+<<tasks-main>>
+
+#+END_SRC
