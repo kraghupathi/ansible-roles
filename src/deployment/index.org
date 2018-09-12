@@ -29,8 +29,14 @@
 ** Pull docker image
    This image is built by using the file
    =runtime/docker-ansible/Dockerfile=.  This images resides
-   on public [[https://hub.docker.com/][dockerhub]].
+   on public [[https://hub.docker.com/][dockerhub]].  Ansible is installed on a ubuntu
+   16.04.  This image is created by running these commands
+   1. =docker build -t vlead/ansible .=
+   2. Login to docker hub 
+      =docker login --username=vlead=
+   3. =docker push vlead/ansible=
 
+   
    #+BEGIN_EXAMPLE
    docker pull akashkaveti/docker-ansible
    #+END_EXAMPLE
