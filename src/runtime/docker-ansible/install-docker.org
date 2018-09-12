@@ -7,9 +7,28 @@
 #+OPTIONS: ^:nil
 
 * Intorduction
-
+  This is an ansible playbook for installing docker on desired
+  hosts. We can choose the version of docker from the vars/main.yml in
+  the role.
 * Install Docker
+  To install docker we need a playbook which uses the role called
+  'docker-install' already present in the roles directory of this
+  repository. To install docker in the target host please follow these
+  steps.
 
+** Pull docker image
+#+BEGIN_EXAMPLE
+docker pull akashkaveti/docker-ansible
+#+END_EXAMPLE
+
+** Start the container by volume mounting the code of this repository
+#+BEGIN_EXAMPLE
+docker run -v /path/to/this/repo:/data -it akashkaveti/docker-ansible 
+#+END_EXAMPLE
+** Execute the playbook
+#+BEGIN_EXAMPLE
+cd /data ; ansible-playbook -i host-ip --user=username -k -K install-docker.yml
+#+END_EXAMPLE
 #+NAME: docker-install
 #+BEGIN_SRC yaml
 ---
