@@ -76,22 +76,6 @@ rancher_server_version: v1.6.21
 This is the structure of the tangled code
 #+BEGIN_EXAMPLE
 roles
-    ├── docker-install
-    │   ├── defaults
-    │   │   └── main.yml
-    │   ├── handlers
-    │   │   └── main.yml
-    │   ├── meta
-    │   │   └── main.yml
-    │   ├── README.md
-    │   ├── tasks
-    │   │   └── main.yml
-    │   ├── tests
-    │   │   ├── inventory
-    │   │   └── test.yml
-    │   └── vars
-    │       └── main.yml
-    ├── docker-install.org
     └── rancher
         ├── defaults
         │   └── main.yml
@@ -99,7 +83,6 @@ roles
         │   └── main.yml
         ├── meta
         │   └── main.yml
-        ├── README.md
         ├── tasks
         │   └── main.yml
         ├── templates
@@ -119,7 +102,7 @@ roles
 ** Tasks Main
    The file generated is
    =rancher-install/tasks/main.yml=.
-#+BEGIN_SRC :tangle rancher-install/tasks/main.yml :eval no :noweb yes
+#+BEGIN_SRC yaml :tangle rancher-install/tasks/main.yml :eval no :noweb yes
 <<tasks-main>>
 
 #+END_SRC
